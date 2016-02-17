@@ -21,10 +21,14 @@
  	
 6. 	Start local web server: `python manage.py runserver`
  	
-7. 	Visit http://localhost:8000/plants/
+7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/)
 
 
 
 ### Notes
--	Each PlantCollection contains zero or many Plants
--	Each Plant is contained in zero or one PlantCollections
+-	A `Plant` is a 'static' database field that contains information about each chooseable plant type (humidity, name etc).
+
+- 	A `PlantInstance` is an actual/concrete instance of a `Plant`
+
+-	Each `PlantCollection` contains zero or many `PlantInstances`
+-	Each `PlantInstance` is contained in one `PlantCollections`
