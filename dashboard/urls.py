@@ -20,5 +20,5 @@ from django.contrib.auth.models import User
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('plant.urls')),
+    url(r'^', include('plants.urls')),
 ]

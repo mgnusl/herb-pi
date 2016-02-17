@@ -1,0 +1,14 @@
+[
+{
+  "model": "plants.plant",
+  "pk": 4,
+  "fields": {
+    "name": "Basil",
+    "date_created": "2016-02-17T12:12:10.557Z",
+    "ideal_humidity": "0.60",
+    "fertilizing_interval": 0,
+    "ideal_ph_min": "0.00",
+    "ideal_ph_max": "0.00"
+  }
+}
+]
