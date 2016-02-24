@@ -1,41 +1,30 @@
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from plants.models import Plant
 from plants.serializers import PlantSerializer
 
-class JSONResponse(HttpResponse):
-    """
-    An HttpResponse that renders its content into JSON.
-    """
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
 
-
-@csrf_exempt
-def plant_list(request):
+@api_view(['GET', 'POST'])
+def plant_list(request, format=None):
     """
     List all plants, or create a new plant
     """
     if request.method == 'GET':
         plants = Plant.objects.all()
         serializer = PlantSerializer(plants, many=True)
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = PlantSerializer(data=data)
+        serializer = PlantSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JSONResponse(serializer.data, status=201)
-        return JSONResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
 
-@csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
 def plant_detail(request, pk):
     """
     Retrieve, update or delete single plant
@@ -43,20 +32,19 @@ def plant_detail(request, pk):
     try:
         plant = Plant.objects.get(pk=pk)
     except Plant.DoesNotExist:
-        return HttpResponse(status=404)
+        return Reponse(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = PlantSerializer(plant)
-        return JSONResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = PlantSerializer(plant, data=data)
+        serializer = PlantSerializer(plant, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JSONResponse(serializer.data)
-        return JSONResponse(serializer.errors, status=400)
+            return Reponse(serializer.data)
+        return Reponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         plant.delete()
-        return HttpResponse(status=204)        
+        return Reponse(status=stauts.HTTP_204_NO_CONTENT)        
