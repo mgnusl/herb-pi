@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'plants',
-    'django_cron',
+    'django_crontab',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -53,8 +53,9 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CRON_CLASSES = [
-    "plants.cron.MyCronJob",
+
+CRONJOBS = [
+    ('*/1 * * * *', 'cron.get_moisture_cron')
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
