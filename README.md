@@ -27,17 +27,17 @@
 
 Requirements
 
-	`Node 5.0.0` or higher is required.
+`Node 5.0.0` or higher is required.
 
 Install dependencies
 
-	1. From web-app directory run `npm install` to setup dependencies
+1. From web-app directory run `npm install` to setup dependencies
 
 Start development server, and get to work!
 
-	1. From web-app directory run `npm run dev`, this will provide module bundling with hot reloading
+1. From web-app directory run `npm run dev`, this will provide module bundling with hot reloading
 
-	2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
+2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
 
 Credit to..
 
