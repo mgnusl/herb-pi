@@ -25,23 +25,23 @@
 
 **Front-end setup:**
 
-*Requirements*
+Requirements
 
-`Node 5.0.0` or higher is required.
+	`Node 5.0.0` or higher is required.
 
-*Install dependencies*
+Install dependencies
 
-1. From web-app directory run `npm install` to setup dependencies
+	1. From web-app directory run `npm install` to setup dependencies
 
-*Start development server, and get to work!*
+Start development server, and get to work!
 
-1. From web-app directory run `npm run dev`, this will provide module bundling with hot reloading
+	1. From web-app directory run `npm run dev`, this will provide module bundling with hot reloading
 
-2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
+	2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
 
+Credit to..
 
-*Credit*
-Thanks to tsaiDavid for a friendly introduction to Redux + React through `simple-redux-boilerplate`[1]
+Thanks to tsaiDavid for a friendly introduction to Redux + React through [simple-redux-boilerplate][1]
 
 ### Notes
 -	A `Plant` is a 'static' database field that contains information about each chooseable plant type (humidity, name etc).
