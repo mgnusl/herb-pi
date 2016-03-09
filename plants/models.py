@@ -33,6 +33,11 @@ class Plant(models.Model):
         return self.name
 
 
+class MoistureLog(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    moisture_level = models.IntegerField(default=0)
+
+
 class PlantCollection(models.Model):
     name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
