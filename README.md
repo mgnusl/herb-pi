@@ -7,7 +7,7 @@
 -	pip
 -	Virtualenv (`pip install virtualenv`)
 
-**Setup:**
+**Back-end setup:**
 
 1.	Set up virtualenv: `virtualenv env`
 	
@@ -23,7 +23,25 @@
  	
 7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/)
 
+**Front-end setup:**
 
+*Requirements*
+
+`Node 5.0.0` or higher is required.
+
+*Install dependencies*
+
+1. From web-app directory run `npm install` to setup dependencies
+
+*Start development server, and get to work!*
+
+1. From web-app directory run `npm run dev`, this will provide module bundling with hot reloading
+
+2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
+
+
+*Credit*
+Thanks to tsaiDavid for a friendly introduction to Redux + React through `simple-redux-boilerplate`[1]
 
 ### Notes
 -	A `Plant` is a 'static' database field that contains information about each chooseable plant type (humidity, name etc).
@@ -32,3 +50,7 @@
 
 -	Each `PlantCollection` contains zero or many `PlantInstances`
 -	Each `PlantInstance` is contained in one `PlantCollections`
+
+
+[1]: https://github.com/tsaiDavid/simple-redux-boilerplate
+
