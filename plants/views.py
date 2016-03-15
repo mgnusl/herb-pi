@@ -1,8 +1,8 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from plants.models import Plant
-from plants.serializers import PlantSerializer
+from plants.models import Plant, MoistureLog
+from plants.serializers import PlantSerializer, MoistureLogSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -47,3 +47,21 @@ def plant_detail(request, pk):
     elif request.method == 'DELETE':
         plant.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET', 'POST'])
+def sensor_log(request, format=None):
+    """
+    List log data from moisture sensor
+    """
+    if request.method == 'GET':
+        moisturelog = MoistureLog.objects.all()
+        serializer = MoistureLogSerializer(moisturelog, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = MoistureLogSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
