@@ -142,3 +142,9 @@ node_modules/
 
 # OSX
 .DS_Store
+
+# PyCharm project files
+.idea
+
+# Sublime
+*.sublime-workspace
