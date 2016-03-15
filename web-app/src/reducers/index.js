@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
-import selectedHerb from './selected_herb.js'
+import selectedHerb from './reducersHerbManager.js';
+import herbs from './reducersREST.js';
+
 
 /**
+ * Combining Reducers
+ *
  * combineReducers is important to understand. As your app might grow in size
  * and complexity, you will likely begin to split your reducers into separate
  * functions - with each one managing a separate slice of the state! This helper
@@ -14,8 +18,9 @@ import selectedHerb from './selected_herb.js'
  *
  * More info: http://rackt.org/redux/docs/api/combineReducers.html
  */
+
 const rootReducer = combineReducers({
-  selectedHerb, // you might be used to: counter: counter,
+  selectedHerb, herbs
 });
 
 export default rootReducer;

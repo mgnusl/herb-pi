@@ -55,6 +55,16 @@ body {
 	}
 }
 
+
+.manager-fetching-container {
+	display: flex;
+	height: 90%;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	background-color: $herblist-background;
+}
+
 .manager-list-item {
 	padding: 2% 4% 4% 2%;
 	height: 8%;

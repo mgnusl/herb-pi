@@ -5,6 +5,7 @@ import HerbManager from './HerbManager';
 /**
  * Component is exported for conditional usage in Root.js
  */
+ 
 module.exports = class Root extends Component {
   render() {
     const { store } = this.props;

@@ -5,7 +5,11 @@
  */
 
 
-/* HerblistManager Action Constants */
+/* HerbManager Action Constants */
 export const DELETE_HERB = 'DELETE_HERB';
 export const NEW_HERB = 'NEW_HERB';
 export const SET_SELECTED_HERB = 'SET_SELECTED_HERB';
+
+/* HerbManager REST Action Constants */
+export const REQUEST_HERBS = 'REQUEST_HERBS';
+export const RECEIVE_HERBS = 'RECEIVE_HERBS';
