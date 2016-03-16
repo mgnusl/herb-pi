@@ -37,7 +37,25 @@ class MoistureLog(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     moisture_level = models.IntegerField(default=0)
 
+    def __str__(self):
+        return str(self.date)
+
+
+class WateringLog(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    num_seconds_open = models.IntegerField()
+
+    def __str__(self):
+        return str(self.date)
+
+
+class PlantInstance(models.Model):
+    plant_type = models.ForeignKey(Plant)
+    moisture_log = models.ForeignKey(MoistureLog)
+    watering_log = models.ForeignKey(WateringLog)
+    date_created = models.DateTimeField(default=True)
+
 
 class PlantCollection(models.Model):
-    name = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
+    plants = models.ForeignKey(PlantInstance, null=True)

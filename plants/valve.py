@@ -5,6 +5,7 @@ import time
 
 VALVENUM = {0:7, 1:11, 2:12, 3:13, 4:15, 5:16, 6:18, 7:22}
 
+
 def open_valve(valve_num, seconds_open):
     """ Must be tested with LEDs """
     if valve_num not in VALVENUM.keys():
