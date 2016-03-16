@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from plants.models import Plant
-from plants.models import MoistureLog
+from plants.models import *
 
 
 class PlantSerializer(serializers.ModelSerializer):
@@ -17,4 +16,20 @@ class MoistureLogSerializer(serializers.ModelSerializer):
         model = MoistureLog
         fields = (
             'date', 'moisture_level'
+        )
+
+
+class WateringLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MoistureLog
+        fields = (
+            'date', 'num_seconds_open'
+        )
+
+
+class PlantInstanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MoistureLog
+        fields = (
+            'date_created', 'plant_type', 'sensor_offset_max', 'sensor_offset_min'
         )

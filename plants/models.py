@@ -5,9 +5,8 @@ from django.db import models
 class Plant(models.Model):
     name = models.CharField(max_length=100)
 
-    # 'Relative humidity'. x.xx
-    ideal_humidity = models.DecimalField(max_digits=3, decimal_places=2,
-                                         help_text="Ideal humidity (between 0 and 1)")
+    # Humidity. LOW, MODERATE, HIGH
+    ideal_humidity = models.CharField(max_length=100, help_text="Ideal humidity (LOW, MODERATE, HIGH)")
 
     # How often the plant needs fertilizer. In days. Not required
     fertilizing_interval = models.IntegerField(default=0, blank=True,
@@ -50,12 +49,11 @@ class WateringLog(models.Model):
 
 
 class PlantInstance(models.Model):
-    plant_type = models.ForeignKey(Plant)
-    moisture_log = models.ForeignKey(MoistureLog)
-    watering_log = models.ForeignKey(WateringLog)
-    date_created = models.DateTimeField(default=True)
-
-
-class PlantCollection(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
-    plants = models.ForeignKey(PlantInstance, null=True)
+    plant_type = models.ForeignKey(Plant)
+    sensor_offset_max = models.IntegerField(help_text="Humidity sensor offset for calibration (max)", default=0)
+    sensor_offset_min = models.IntegerField(help_text="Humidity sensor offset for calibration (min)", default=0)
+    pin_number = models.IntegerField(help_text="Pin number of the humidity sensor", default=0)
+
+    def __str__(self):
+        return str(self.plant_type.name)
