@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = [
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'cron.get_moisture_cron')
+    ('*/1 * * * *', 'cron.maybe_water_plant')
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
