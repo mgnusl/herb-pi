@@ -6,19 +6,17 @@ class Plant(models.Model):
     name = models.CharField(max_length=100)
 
     # Humidity. LOW, MODERATE, HIGH
-    ideal_humidity = models.CharField(max_length=100, help_text="Ideal humidity (LOW, MODERATE, HIGH)")
+    ideal_humidity = models.CharField(max_length=100, choices=[('LOW', 'LOW'), ('MODERATE', 'MODERATE'), ('HIGH', 'HIGH')])
 
     # How often the plant needs fertilizer. In days. Not required
     fertilizing_interval = models.IntegerField(default=0, blank=True,
                                                help_text="How often the plant needs fertilizer (in days)")
 
     # How much sun the plant prefers on a scale from 0-2. Not required.
-    sun_preference = models.IntegerField(default=0, blank=True,
-                                         help_text="How much sun does the plant prefer (0-2)")
+    sun_preference = models.IntegerField(default=0, blank=True, help_text="How much sun does the plant prefer (0-2)")
 
     # How much shade the plant can tolerate on a scale from 0-4. Not required.
-    shade_tolerance = models.IntegerField(default=0, blank=True,
-                                          help_text="How much shade can the plant tolerate (0-4)")
+    shade_tolerance = models.IntegerField(default=0, blank=True, help_text="How much shade can the plant tolerate (0-4)")
 
     # Not used for now
     ideal_ph_min = models.DecimalField(max_digits=3, decimal_places=2, default=0, blank=True,

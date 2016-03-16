@@ -6,7 +6,7 @@ spi = spidev.SpiDev()
 spi.open(0, 1)
 
 """ Moisture constants"""
-LEVELS = {'LOW': 50, 'MODERATE': 70, 'HIGH': 90}
+LEVELS = {'LOW': 60, 'MODERATE': 75, 'HIGH': 90}
 
 
 def read_adc(channel):

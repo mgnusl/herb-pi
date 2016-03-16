@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
-from plants.serializers import PlantSerializer, MoistureLogSerializer
+from plants.serializers import *
 
 
 @api_view(['GET', 'POST'])
@@ -59,10 +59,6 @@ def moisture_sensor_log(request, format=None):
         serializer = MoistureLogSerializer(moisture_log, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = MoistureLogSerializer(data=request.data)
-        return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
-
 
 @api_view(['GET'])
 def watering_log(request, format=None):
@@ -70,10 +66,32 @@ def watering_log(request, format=None):
     List log data from water valve
     """
     if request.method == 'GET':
-        watering_log = WateringLog.objects.all()
-        serializer = MoistureLogSerializer(watering_log, many=True)
+        wateringlog = WateringLog.objects.all()
+        serializer = WateringLogSerializer(wateringlog, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = MoistureLogSerializer(data=request.data)
-        return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def plant_instance(request):
+    """
+    Retrieve, update or delete a plant instance
+    """
+    try:
+        plantinstance = PlantInstance.objects.latest('id')
+    except PlantInstance.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = PlantInstanceSerializer(plantinstance)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = PlantInstanceSerializer(plantinstance, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        plantinstance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
