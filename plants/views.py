@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from plants.models import Plant, MoistureLog
+from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
 from plants.serializers import PlantSerializer, MoistureLogSerializer
 
 
@@ -49,19 +49,31 @@ def plant_detail(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
-def sensor_log(request, format=None):
+@api_view(['GET'])
+def moisture_sensor_log(request, format=None):
     """
     List log data from moisture sensor
     """
     if request.method == 'GET':
-        moisturelog = MoistureLog.objects.all()
-        serializer = MoistureLogSerializer(moisturelog, many=True)
+        moisture_log = MoistureLog.objects.all()
+        serializer = MoistureLogSerializer(moisture_log, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':
         serializer = MoistureLogSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
+
+
+@api_view(['GET'])
+def watering_log(request, format=None):
+    """
+    List log data from water valve
+    """
+    if request.method == 'GET':
+        watering_log = WateringLog.objects.all()
+        serializer = MoistureLogSerializer(watering_log, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = MoistureLogSerializer(data=request.data)
+        return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
