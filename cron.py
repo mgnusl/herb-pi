@@ -4,9 +4,9 @@ from plants.models import *
 
 
 def maybe_water_plant():
-    plant = PlantInstance.objects.latest('id')
-    moisture_level = get_moisture(plant.pin_number, plant.sensor_offset_max, plant.sensor_offset_min)
-    MoistureLog.objects.create(moisture_level=moisture_level)
-    if moisture_level < LEVELS[plant.plant_type.ideal_humidity]:
-        open_valve(plant.pin_number, 1)
-        WateringLog.objects.create(num_seconds_open=1)
+    for plant in PlantInstance.objects.all():
+        moisture_level = get_moisture(plant.pin_number, plant.sensor_offset_max, plant.sensor_offset_min)
+        MoistureLog.objects.create(moisture_level=moisture_level, plant_instance=plant)
+        if moisture_level < LEVELS[plant.plant_type.ideal_humidity]:
+            open_valve(plant.pin_number, 1)
+            WateringLog.objects.create(num_seconds_open=1, plant_instance=plant)
