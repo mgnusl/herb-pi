@@ -30,22 +30,6 @@ class Plant(models.Model):
         return self.name
 
 
-class MoistureLog(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    moisture_level = models.IntegerField(default=0)
-
-    def __str__(self):
-        return str(self.date)
-
-
-class WateringLog(models.Model):
-    date = models.DateTimeField(auto_now_add=True)
-    num_seconds_open = models.IntegerField()
-
-    def __str__(self):
-        return str(self.date)
-
-
 class PlantInstance(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     plant_type = models.ForeignKey(Plant)
@@ -55,3 +39,21 @@ class PlantInstance(models.Model):
 
     def __str__(self):
         return str(self.plant_type.name)
+
+
+class MoistureLog(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    moisture_level = models.IntegerField(default=0)
+    plant_instance = models.ForeignKey(PlantInstance, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.date)
+
+
+class WateringLog(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    num_seconds_open = models.IntegerField()
+    plant_instance = models.ForeignKey(PlantInstance, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.date)

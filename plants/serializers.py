@@ -15,7 +15,7 @@ class MoistureLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = MoistureLog
         fields = (
-            'date', 'moisture_level'
+            'date', 'moisture_level', 'plant_instance'
         )
 
 
@@ -23,7 +23,7 @@ class WateringLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = WateringLog
         fields = (
-            'date', 'num_seconds_open'
+            'date', 'num_seconds_open', 'plant_instance'
         )
 
 
@@ -31,5 +31,6 @@ class PlantInstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlantInstance
         fields = (
-            'date_created', 'plant_type', 'sensor_offset_max', 'sensor_offset_min'
+            'id', 'date_created', 'plant_type', 'sensor_offset_max', 'sensor_offset_min',
+            'pin_number'
         )
