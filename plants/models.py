@@ -30,8 +30,6 @@ class Plant(models.Model):
         return self.name
 
 
-
-
 class PlantInstance(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     plant_type = models.ForeignKey(Plant)
@@ -41,6 +39,7 @@ class PlantInstance(models.Model):
 
     def __str__(self):
         return str(self.plant_type.name)
+
 
 class MoistureLog(models.Model):
     date = models.DateTimeField(auto_now_add=True)

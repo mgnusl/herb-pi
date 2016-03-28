@@ -21,4 +21,16 @@
  	
 6. 	Start local web server: `python manage.py runserver`
  	
-7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/)
+7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/) to see if everything is set up properly
+
+
+### REST endpoints
+-   `/plants/` *(GET, POST)*
+-   `/plant/{id}` *(GET, PUT, DELETE)*
+
+-   `/plantinstances/` *(GET, POST)*
+-   `/plantinstance/{id}` *(GET, PUT, DELETE)*
+
+-   `/wateringlog/{fk}` *(GET*)
+
+-   `/moisturelog/{fk}` *(GET*)
