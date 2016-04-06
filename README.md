@@ -39,6 +39,10 @@ Start development server, and get to work!
 
 2. Open your favorite web browser and visit `http://localhost:3000/`, your now ready for work! 
 
+Build Bundle
+
+1. From `web-app` folder run `npm run build` to bundle all modules into a single`bundle.js`, which can be located under `web-app/dist`
+
 Credit to..
 
 Thanks to tsaiDavid for a friendly introduction to Redux + React through [simple-redux-boilerplate][1]
