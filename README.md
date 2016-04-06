@@ -25,12 +25,12 @@
 
 
 ### REST endpoints
--   `/plants/` *(GET, POST)*
--   `/plant/{id}` *(GET, PUT, DELETE)*
+-   `api/plants/` *(GET, POST)*
+-   `api/plant/{id}` *(GET, PUT, DELETE)*
 
--   `/plantinstances/` *(GET, POST)*
--   `/plantinstance/{id}` *(GET, PUT, DELETE)*
+-   `api/plantinstances/` *(GET, POST)*
+-   `api/plantinstance/{id}` *(GET, PUT, DELETE)*
 
--   `/wateringlog/{fk}` *(GET*)
+-   `api/wateringlog/{fk}` *(GET*)
 
--   `/moisturelog/{fk}` *(GET*)
+-   `api/moisturelog/{fk}` *(GET*)
