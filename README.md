@@ -16,7 +16,7 @@
  	
 3.  Install requirements `pip install -r requirements.txt`
   
-4.	`python manage.py migrate`
+4.	Setup database `python manage.py migrate`
 	
 5. 	Load initial plant data `python manage.py loaddata plants/fixtures/initial_data.json`
 
@@ -26,7 +26,8 @@
  	
 8. 	Start local web server: `python manage.py runserver`
  	
-9. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/) to see if everything is set up properly
+9. 	Visit [http://localhost:8000/](http://localhost:8000/) and
+[http://localhost:8000/api/plants](http://localhost:8000/api/plants) to see if everything is set up properly
 
 
 ### REST endpoints
