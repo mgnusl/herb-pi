@@ -133,4 +133,4 @@ node_modules/
 
 # NPM build
 webpack-stats.json
-assets/bundles
+web-app/assets/bundles
