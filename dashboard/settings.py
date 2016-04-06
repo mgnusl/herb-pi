@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'plants',
+    'django_crontab',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -52,6 +53,11 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'cron.maybe_water_plant')
 ]
 
 ROOT_URLCONF = 'dashboard.urls'

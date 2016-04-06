@@ -5,6 +5,9 @@ import spidev
 spi = spidev.SpiDev()
 spi.open(0, 1)
 
+""" Moisture constants"""
+LEVELS = {'LOW': 60, 'MODERATE': 75, 'HIGH': 90}
+
 
 def read_adc(channel):
     """ Reads a 10bit value from ADC """
