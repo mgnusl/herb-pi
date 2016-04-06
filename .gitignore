@@ -118,3 +118,19 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# NPM
+node_modules/
+
+# OSX
+.DS_Store
+
+# PyCharm project files
+.idea
+
+# Sublime
+*.sublime-workspace
+
+# NPM build
+webpack-stats.json
+web-app/assets/bundles

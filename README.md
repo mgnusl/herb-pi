@@ -6,6 +6,7 @@
 -	Python
 -	pip
 -	Virtualenv (`pip install virtualenv`)
+-   Node 5.0.0 or higher
 
 **Setup:**
 
@@ -15,13 +16,18 @@
  	
 3.  Install requirements `pip install -r requirements.txt`
   
-4.	`python manage.py migrate`
+4.	Setup database `python manage.py migrate`
 	
-5. 	`python manage.py loaddata plants/fixtures/initial_data.json`
+5. 	Load initial plant data `python manage.py loaddata plants/fixtures/initial_data.json`
+
+6.  From web-app directory, run `npm install` to setup dependencies
+
+7.  From web-app directory, run `npm run build` to bundle all modules
  	
-6. 	Start local web server: `python manage.py runserver`
+8. 	Start local web server: `python manage.py runserver`
  	
-7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/) to see if everything is set up properly
+9. 	Visit [http://localhost:8000/](http://localhost:8000/) and
+[http://localhost:8000/api/plants](http://localhost:8000/api/plants) to see if everything is set up properly
 
 
 ### REST endpoints
@@ -34,3 +40,10 @@
 -   `api/wateringlog/{fk}` *(GET*)
 
 -   `api/moisturelog/{fk}` *(GET*)
+
+
+### Credit to...
+
+Thanks to tsaiDavid for a friendly introduction to Redux + React through [simple-redux-boilerplate][1]
+
+[1]: https://github.com/tsaiDavid/simple-redux-boilerplate

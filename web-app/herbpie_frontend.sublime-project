@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"name": "Herb Pie",
+			"path": ".",
+			"folder_exclude_patterns": ["node_modules"]
+		}
+	]
+}
