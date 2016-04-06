@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
@@ -9,8 +10,8 @@ module.exports = {
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve('./assets/bundles/'),
+    filename: '[name]-[hash].js',
     publicPath: '/static/'
   },
   plugins: [
@@ -33,6 +34,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
+
+    // Tells webpack where to store data about your bundles.
+    new BundleTracker({filename: './webpack-stats.json'}),
   ],
   module: {
     loaders: [
@@ -47,5 +51,12 @@ module.exports = {
         loader: 'style!css!sass'
       }
     ]
-  }
+  },
+
+  resolve: {
+        //tells webpack where to look for modules
+        modulesDirectories: ['web-app/node_modules'],
+        //extensions that should be used to resolve modules
+        extensions: ['', '.js', '.jsx'] 
+    }  
 };

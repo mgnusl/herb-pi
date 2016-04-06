@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'plants',
     'django_crontab',
+    'webpack_loader',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'dashboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,7 +142,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = (
+    #This lets Django's collectstatic store our bundles
+    os.path.join(BASE_DIR, 'web-app/assets/bundles'), 
+)
+
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'web-app/assets',
+        'STATS_FILE': os.path.join(BASE_DIR, 'web-app/webpack-stats.json'),
+    }
+}
 
 
 # Allow Cross Origin Requests
