@@ -130,3 +130,7 @@ node_modules/
 
 # Sublime
 *.sublime-workspace
+
+# NPM build
+webpack-stats.json
+assets/bundles
