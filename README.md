@@ -7,7 +7,7 @@
 -	pip
 -	Virtualenv (`pip install virtualenv`)
 
-**Setup:**
+**Back-end setup:**
 
 1.	Set up virtualenv: `virtualenv env`
 	
@@ -23,6 +23,7 @@
  	
 7. 	Visit [http://localhost:8000/plants/](http://localhost:8000/plants/) to see if everything is set up properly
 
+**Front-end setup:**
 
 ### REST endpoints
 -   `api/plants/` *(GET, POST)*
