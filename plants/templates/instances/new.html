@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}New instance{% endblock %}
+{% block content %}
+<h1>New plant instance</h1>
+<form method="post">
+{% csrf_token %}
+{% bootstrap_form form %}
+<br>
+<input type="submit" value="Save" class="btn btn-primary" />
+</form>
+{% endblock %}

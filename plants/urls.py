@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^api/plantinstance/(?P<pk>[0-9]+)/$', views.plant_instance),
     url(r'^api/plantinstances/$', views.plantinstance_list),
     url(r'^plants/$', views.plants_index, name='plants/index'),
+    url(r'^instances/$', views.plant_instances_index, name='instances/index'),
+    url(r'^instances/new/$', views.new_plant_instance, name='instances/new'),
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 ]
 

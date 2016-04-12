@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
 from django.shortcuts import render
 from plants.serializers import *
+from plant_instance_form import PlantInstanceForm
 
 
 @api_view(['GET', 'POST'])
@@ -118,3 +119,17 @@ def plantinstance_list(request, format=None):
 def plants_index(request):
     context = {'plants': Plant.objects.all()}
     return render(request, 'plants/index.html', context)
+
+def plant_instances_index(request):
+    context = {'instances': PlantInstance.objects.all()}
+    return render(request, 'instances/index.html', context)
+
+def new_plant_instance(request):
+    if request.method == 'POST':
+        form = PlantInstanceForm(data=request.POST)
+        if form.is_valid():
+            instance = PlantInstance(plant_type=form.cleaned_data['plant_type'],
+                                     pin_number=form.cleaned_data['pin_number'])
+            instance.save()
+    context = {'form': PlantInstanceForm()}
+    return render(request, 'instances/new.html', context)
