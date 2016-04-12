@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
+from django.shortcuts import render
 from plants.serializers import *
 
 
@@ -113,3 +114,7 @@ def plantinstance_list(request, format=None):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def plants_index(request):
+    context = {'plants': Plant.objects.all()}
+    return render(request, 'plants/index.html', context)

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Plants{% endblock %}
+{% block content %}
+<div class="list-group">
+{% for plant in plants %}
+<a href="#" class="list-group-item">{{plant}}</a>
+{% endfor %}
+</div>
+{% endblock %}
