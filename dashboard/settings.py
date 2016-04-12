@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'plants',
     'django_crontab',
-    'webpack_loader',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -141,20 +141,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'web-app/assets/bundles'), 
-)
-
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'web-app/assets',
-        'STATS_FILE': os.path.join(BASE_DIR, 'web-app/webpack-stats.json'),
+# Point to local files since the project should work offline as well
+BOOTSTRAP3 = {
+    'jquery_url': '/static/js/jquery.min.js',
+    'base_url': '/static/css/',
+    'css_url': '/static/css/bootstrap.min.css',
+    'theme_url': '/static/css/bootstrap.theme.min.css',
+    'javascript_url': '/static/js/bootstrap.min.js',
     }
-}
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
 
 
 # Allow Cross Origin Requests

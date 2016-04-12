@@ -1,11 +1,5 @@
-{% load render_bundle from webpack_loader %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HerbPi</title>
-    </head>
-    <body>
-        <div id="container"></div>
-        {% render_bundle 'main' %}
-    </body>
-</html>
+{% extends 'base.html' %}
+{% block title %}Index{% endblock %}
+{% block content %}
+Test
+{% endblock %}
