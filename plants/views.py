@@ -2,9 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from plants.serializers import *
 from plant_instance_form import PlantInstanceForm
+from django.contrib import messages
 
 
 @api_view(['GET', 'POST'])
@@ -131,5 +132,7 @@ def new_plant_instance(request):
             instance = PlantInstance(plant_type=form.cleaned_data['plant_type'],
                                      pin_number=form.cleaned_data['pin_number'])
             instance.save()
+            messages.success(request, 'Instance created')
+            return redirect('instances/index')
     context = {'form': PlantInstanceForm()}
     return render(request, 'instances/new.html', context)

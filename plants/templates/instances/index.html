@@ -2,6 +2,8 @@
 {% block title %}Plants{% endblock %}
 {% block content %}
 <h2>Plant instances</h2>
+<a href="{% url 'instances/new'%}" class="btn btn-primary">Add new plant instance</a>
+<br><br>
 <div class="list-group">
 {% for plant in instances %}
 <a href="#" class="list-group-item">{{plant}}</a>
