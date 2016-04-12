@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 
 export default class HerbManagerControls extends Component {
 
@@ -6,32 +7,27 @@ export default class HerbManagerControls extends Component {
 		super(props, context)
 	}
 
+	onPlusClick() {
+		this.props.actions.herbActions.setTopContainerContent(1)
+	}
+
+	onMinusClick() {
+		console.log("Prompt user for herb removal")
+	}
+
 	render() {
-		return (
-			<div className="manager-controls-container">
-				<div className="manager-controls-button">
-					<HerbManagerControlsButton text="Add" />
+		if (this.props.topContent.selected === -1) {
+			return (
+				<div className="manager-controls-container">
+					<Button className="glyphicon glyphicon-plus" bsSize="large" onClick={this.onPlusClick.bind(this)}></Button>;
 				</div>
-			</div>
-		);
-	}
-}
-
-class HerbManagerControlsButton extends Component {
-	
-	constructor(props, context) {
-		super(props, context)
-	}
-
-	handleClick() {
-
-	}
-
-	render() {
-		return (
-			<div className="manager-controls-button" onClick={this.handleClick.bind(this)}>
-				<p>{this.props.text}</p>
-			</div>
-		);
+			);
+		} else {
+			return (
+				<div className="manager-controls-container">
+					<Button className="glyphicon glyphicon-minus" bsSize="large"></Button>;
+				</div>
+			);
+		}
 	}
 }

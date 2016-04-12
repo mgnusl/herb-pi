@@ -1,4 +1,4 @@
-import { NEW_HERB, DELETE_HERB, SET_SELECTED_HERB } from '../constants/ActionTypes.js'
+import { NEW_HERB, DELETE_HERB, SET_SELECTED_HERB } from '../constants/ActionTypes.js';
 
 export function newHerb() {
 	return {

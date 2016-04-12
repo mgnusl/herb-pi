@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import selectedHerb from './reducersHerbManager.js';
+import {topContent, bottomContent } from './reducersHerbManager.js';
+import { reducer as formReducer } from 'redux-form';
 import herbs from './reducersREST.js';
 
 
@@ -20,7 +21,7 @@ import herbs from './reducersREST.js';
  */
 
 const rootReducer = combineReducers({
-  selectedHerb, herbs
+  bottomContent, topContent, herbs, form: formReducer
 });
 
 export default rootReducer;

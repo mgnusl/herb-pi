@@ -25,22 +25,3 @@
         box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
     }
 }
-
-/**
-* Button Mixin
-*/
-
-@mixin hollow_button ($color) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 20px;
-    font-style: bold;
-    height: 20px;
-    width: 130px;
-    border: 2px solid;
-    border-color: $color;
-    border-radius: 10px;
-    color: $color;
-}

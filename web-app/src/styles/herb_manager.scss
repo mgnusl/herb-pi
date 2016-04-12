@@ -2,12 +2,17 @@
 
 $herblist-background: #EEEEEE;
 $herblist-cards: #E0E0E0;
+$herblist-card-selected: #c7c7c7;
 $background-controls: #BDBDBD;
 $button-add-color: #4caf50;
 
 * {
 	padding: 0;
 	margin: 0;
+}
+
+p {
+	font-family: "Montserrat";
 }
 
 html {
@@ -34,7 +39,7 @@ body {
 	width: 100%;
 }
 
-.manager-list-container {
+.manager-top-container {
 	display: flex;
 	flex-basis: 90%;
 	height: 90%;
@@ -42,6 +47,8 @@ body {
 	flex-direction: row;
 	background-color: $herblist-background;
 	overflow: hidden;
+	align-items: center;
+	justify-content: center;
 
 	ul {
 		display: flex;
@@ -55,6 +62,17 @@ body {
 	}
 }
 
+.manager-form-container {
+	display: flex;
+	height: 90%;
+	width: 80%;
+	flex-basis: 90%;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	background-color: $herblist-cards;
+	@include box_shadow(1);
+}
 
 .manager-fetching-container {
 	display: flex;
@@ -69,9 +87,13 @@ body {
 	padding: 2% 4% 4% 2%;
 	height: 8%;
 	width: 80%;
-	background-color: $herblist-cards;
 	margin-bottom: 1%;
+	background-color: $herblist-cards;
 	@include box_shadow(1);
+}
+
+.selected-item {
+	background-color: $herblist-card-selected;
 }
 
 .manager-controls-container {
@@ -83,9 +105,4 @@ body {
 	width: 100%;
 	background-color: $background-controls;
 	@include box_shadow(2);
-}
-
-.manager-controls-button {
-	margin-right: 2%;
-	@include hollow_button($button-add-color);
 }

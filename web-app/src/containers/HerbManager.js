@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
-import HerbManagerControls from './../components/HerbManagerControls.js'
-import HerbManagerList from './../components/HerbManagerList.js'
+import HerbManagerControls from './../components/HerbManagerControls.js';
+import HerbManagerList from './../components/HerbManagerList.js';
+import HerbManagerForm from './../components/HerbManagerForm.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as HerbControlsActions from '../actions/HerbControlsActions.js'
-import * as HerbRESTActions from '../actions/HerbRESTActions.js'
+import * as HerbControlsActions from '../actions/HerbControlsActions.js';
+import * as HerbRESTActions from '../actions/HerbRESTActions.js';
+import * as HerbFormActions from '../actions/HerbFormActions.js';
+import * as HerbActions from '../actions/HerbActions.js';
+
 
 
 /**
@@ -20,12 +24,20 @@ export default class HerbManager extends Component {
 	constructor(props, context) {
 		super(props, context)
 	}
-
+  
 	render() {
 		return (
 			<div className="manager-content">
-				<HerbManagerList herbsData={this.props.herbsData} actions={this.props.actions} />
-				<HerbManagerControls />
+        <div className="manager-top-container">
+          {(() => {
+            switch(this.props.topContent.contentIndex) {
+              case 0: return <HerbManagerList topContent={this.props.topContent} herbsData={this.props.herbsData} actions={this.props.actions} />;
+              case 1: return <HerbManagerForm actions={this.props.actions}/>
+              default: return undefined;
+            }
+          })()}
+        </div>
+				<HerbManagerControls topContent={this.props.topContent} bottomContent={this.props.bottomContent} actions={this.props.actions} />
 			</div>
 		);
 	}
@@ -41,7 +53,8 @@ export default class HerbManager extends Component {
 
 function mapStateToProps(state) {
   return {
-    selectedHerb: state.selectedHerb,
+    topContent: state.topContent,
+    bottomContent: state.bottomContent,
     herbsData: state.herbs
   };
 }
@@ -61,8 +74,12 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    herbControlsActions: bindActionCreators(HerbControlsActions, dispatch),
-    herbRESTActions: bindActionCreators(HerbRESTActions, dispatch)
+    actions: {
+      herbControlsActions: bindActionCreators(HerbControlsActions, dispatch),
+      herbRESTActions: bindActionCreators(HerbRESTActions, dispatch),
+      herbFormActions: bindActionCreators(HerbFormActions, dispatch),
+      herbActions: bindActionCreators(HerbActions, dispatch)
+    }
   };
 }
 

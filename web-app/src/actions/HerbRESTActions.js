@@ -42,3 +42,11 @@ export function fetchHerbs() {
 			)
 	}
 }
+
+// export function commitHerb() {
+
+// 	return function(dispatch) {
+
+// 		dispath()
+// 	}
+// }
