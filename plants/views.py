@@ -191,8 +191,8 @@ def delete_plant_instance(request, id):
 
 def single_plant_instance(request, pk):
     context = get_object_or_404(PlantInstance, pk=pk)
-    moisture_logs = MoistureLog.objects.filter(plant_instance=pk)
-    watering_logs = WateringLog.objects.filter(plant_instance=pk)
+    moisture_logs = MoistureLog.objects.filter(plant_instance=pk)[:1000]
+    watering_logs = WateringLog.objects.filter(plant_instance=pk)[:1000]
 
     moisture_log_levels = []
     moisture_log_dates = []
