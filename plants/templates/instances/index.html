@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block title %}Plants{% endblock %}
 {% block content %}
-    <h2>Plants</h2>
+    <h1>Plants</h1>
     <a href="{% url 'instances/new' %}" class="btn btn-primary">Add new plant instance</a>
     <br><br>
     {% for plant in instances %}
+      <a href="{% url 'instances/single_instance' pk=plant.id%}" style="color:black; text-decoration: none;">
         <div class="col-md-3">
             <div class="well" style="background-color: white;">
                 {% if plant.sensor_offset_min == 0 and plant.sensor_offset_max == 0 %}
@@ -20,6 +21,7 @@
                 <a href="{% url 'calibrate' plant_instance_id=plant.id %}" class="btn btn-warning">Calibrate</a>
             </div>
         </div>
+      </a>
     {% endfor %}
 
 {% endblock %}
