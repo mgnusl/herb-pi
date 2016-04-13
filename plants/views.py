@@ -145,6 +145,7 @@ def new_plant_instance(request, id=None):
     context = {'form': form, 'id': id}
     return render(request, 'instances/new.html', context)
 
+
 def delete_plant_instance(request, id):
     plant_instance = PlantInstance.objects.get(id=id)
     plant_instance.delete()
@@ -155,6 +156,7 @@ def delete_plant_instance(request, id):
 def single_plant_instance(request, pk):
     context = get_object_or_404(PlantInstance, pk=pk)
     moisture_logs = MoistureLog.objects.filter(plant_instance=pk)
+    watering_logs = WateringLog.objects.filter(plant_instance=pk)
 
     moisture_log_levels = []
     moisture_log_dates = []
@@ -162,8 +164,11 @@ def single_plant_instance(request, pk):
         moisture_log_dates.append(log_item.date.strftime("%B %d, %Y %H:%M"))
         moisture_log_levels.append(log_item.moisture_level)
 
-    return render(request, 'instances/single_instance.html', {'instance': context, 'moisture_log_levels': moisture_log_levels,
-                                                              'moisture_log_dates': moisture_log_dates})
+    return render(request, 'instances/single_instance.html', {'instance': context,
+                                                              'moisture_log_levels': moisture_log_levels,
+                                                              'moisture_log_dates': moisture_log_dates,
+                                                              'watering_logs': watering_logs})
+
 
 def calibrate_sensor(request, plant_instance_id):
     plant_instance = PlantInstance.objects.get(id=plant_instance_id)
@@ -184,5 +189,5 @@ def calibrate_sensor(request, plant_instance_id):
                 messages.success(request, 'Sensor maximum calibrated')
             except Exception as e:
                 messages.error(request, 'Unable to get sensor input')
-    context  = {'plant_instance': plant_instance}
+    context = {'plant_instance': plant_instance}
     return render(request, 'instances/calibrate.html', context)

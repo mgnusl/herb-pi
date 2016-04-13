@@ -5,11 +5,25 @@
     <script src="{% static "/static/js/highcharts.js" %}"></script>
     <script src="{% static "/static/js/exporting.js" %}"></script>
 
-    <h2>{{ instance }}</h2>
+    <style>
+        .move-right{
+            display: block;
+            float: right;
+        }
+    </style>
+
+    <a href="#" class="btn btn-default move-right">Edit</a>
+
+    <div class="page-header">
+        <h1>{{ instance }} <small>Subtext for header</small></h1>
+    </div>
+
     <p>Connected to sensor: {{ instance.pin_number }}</p>
     <p>Ideal humidity: {{ instance.plant_type.ideal_humidity }}</p>
     <p>Sun preference: {{ instance.plant_type.sun_preference }}</p>
-    <a href="#" class="btn btn-default">Edit</a>
+
+    <br><br>
+    <h3>Humidity log</h3>
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
     <script>
@@ -19,22 +33,27 @@
                     type: 'line'
                 },
                 title: {
-                    text: 'Humidity log'
+                    text: ''
                 },
                 xAxis: {
-                    categories: {{ moisture_log_dates|safe }}
+                    categories: {{ moisture_log_dates|safe }},
+                    min: 0,
+                    max: 20
                 },
                 yAxis: {
                     title: {
-                        text: 'Humidity level'
+                        text: 'Humidity level (%)'
                     }
+                },
+                scrollbar: {
+                    enabled: true
                 },
                 plotOptions: {
                     line: {
                         dataLabels: {
                             enabled: true
                         },
-                        enableMouseTracking: false
+                        enableMouseTracking: true
                     }
                 },
                 series: [{
@@ -45,6 +64,29 @@
         });
     </script>
 
+    <br><br>
+    <h3>Watering log</h3>
+    {% if watering_logs %}
+        <!--<table class="table table-hover" style="width: 50%; margin: auto">-->
+        <table class="table table-hover" style="width: 60%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Watering valve open for number of seconds</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log_item in watering_logs %}
+                    <tr>
+                        <td>{{ log_item.date|date:'M d Y, H:i' }}</td>
+                        <td>{{ log_item.num_seconds_open }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h5>This plant has not been watered yet.</h5>
+    {% endif %}
 
 
 {% endblock %}
