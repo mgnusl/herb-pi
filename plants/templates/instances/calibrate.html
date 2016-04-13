@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Calibration{% endblock %}
+{% block content %}
+<h2>Calibrate sensor #{{plant_instance.pin_number}}</h2>
+<dl class="dl-horizontal">
+<dt>Value in air</dt><dd>{{plant_instance.sensor_offset_min}} <a href="?minmax=min" class="btn btn-primary btn-xs" onclick="return confirm('Ready to calibrate. Make sure that the sensor is in open air and click OK')">Calibrate</a></dd>
+<dt>Value in water</dt><dd>{{plant_instance.sensor_offset_max}} <a href="?minmax=max" class="btn btn-primary btn-xs" onclick="return confirm('Ready to calibrate. Make sure that the sensor is in a cup of water and click OK')">Calibrate</a></dd>
+</dl>
+{% endblock %}

@@ -7,11 +7,17 @@
 {% for plant in instances %}
 <div class="col-md-3">
   <div class="well" style="background-color: white;">
+{% if plant.sensor_offset_min == 0 and plant.sensor_offset_max == 0 %}
+  <div class="alert alert-warning">
+    Sensor not calibrated
+  </div>
+{% endif %}
 <h3>{{plant}}</h3>
 <p>Connected to sensor: {{plant.pin_number}}</p>
 <p>Ideal humidity: {{plant.plant_type.ideal_humidity}}</p>
 <p>Sun preference: {{plant.plant_type.sun_preference}}</p>
 <a href="{% url 'instances/edit' id=plant.id %}" class="btn btn-info">Edit</a>
+<a href="{% url 'calibrate' plant_instance_id=plant.id %}" class="btn btn-warning">Calibrate</a>
 </div>
 </div>
 {% endfor %}

@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from plants.serializers import *
 from plant_instance_form import PlantInstanceForm
 from django.contrib import messages
+from moisture import *
 
 
 @api_view(['GET', 'POST'])
@@ -140,3 +141,25 @@ def new_plant_instance(request, id=None):
         form = PlantInstanceForm()
     context = {'form': form}
     return render(request, 'instances/new.html', context)
+
+def calibrate_sensor(request, plant_instance_id):
+    plant_instance = PlantInstance.objects.get(id=plant_instance_id)
+    minmax = request.GET.get('minmax')
+    if minmax is not None:
+        print minmax
+        if minmax == 'min':
+            try:
+                plant_instance.sensor_offset_min = read_adc(plant_instance.pin_number)
+                plant_instance.save()
+                messages.success(request, 'Sensor minimum calibrated')
+            except Exception as e:
+                messages.error(request, 'Unable to get sensor input')
+        elif minmax == 'max':
+            try:
+                plant_instance.sensor_offset_max = read_adc(plant_instance.pin_number)
+                plant_instance.save()
+                messages.success(request, 'Sensor maximum calibrated')
+            except Exception as e:
+                messages.error(request, 'Unable to get sensor input')
+    context  = {'plant_instance': plant_instance}
+    return render(request, 'instances/calibrate.html', context)

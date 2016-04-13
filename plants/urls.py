@@ -14,6 +14,8 @@ urlpatterns = [
     url(r'^instances/$', views.plant_instances_index, name='instances/index'),
     url(r'^instances/new/$', views.new_plant_instance, name='instances/new'),
     url(r'^instances/edit/(?P<id>\w+)$', views.new_plant_instance, name='instances/edit'),
+    url(r'^instances/calibrate/(?P<plant_instance_id>\w+)$', views.calibrate_sensor, name='calibrate'),
+
     url(r'^$', TemplateView.as_view(template_name='index.html')),
 ]
 
