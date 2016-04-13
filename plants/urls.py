@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^plants/$', views.plant_instances_index, name='instances/index'),
     url(r'^plants/new/$', views.new_plant_instance, name='instances/new'),
     url(r'^plants/edit/(?P<id>\w+)$', views.new_plant_instance, name='instances/edit'),
+    url(r'^plants/delete/(?P<id>\w+)$', views.delete_plant_instance, name='instances/delete'),
     url(r'^plants/calibrate/(?P<plant_instance_id>\w+)$', views.calibrate_sensor, name='calibrate'),
     url(r'^instances/(?P<pk>[0-9]+)/$', views.single_plant_instance, name='instances/single_instance'),
     url(r'^$', views.plant_instances_index),

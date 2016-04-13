@@ -142,8 +142,14 @@ def new_plant_instance(request, id=None):
         form = PlantInstanceForm(instance=PlantInstance.objects.get(id=id))
     else:
         form = PlantInstanceForm()
-    context = {'form': form}
+    context = {'form': form, 'id': id}
     return render(request, 'instances/new.html', context)
+
+def delete_plant_instance(request, id):
+    plant_instance = PlantInstance.objects.get(id=id)
+    plant_instance.delete()
+    messages.success(request, 'Plant deleted')
+    return redirect('instances/index')
 
 
 def single_plant_instance(request, pk):
