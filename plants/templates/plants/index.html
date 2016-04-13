@@ -14,7 +14,7 @@
                 <td>{{ plant.name }}</td>
                 <td>{{ plant.ideal_humidity }}</td>
                 <td>{{ plant.sun_preference }}</td>
-                <td><a href="{% url 'plants/edit' id=plant.id %}">Edit</a>|<a
+                <td><a href="{% url 'plants/edit' id=plant.id %}">Edit</a> | <a
                         href="{% url 'plants/delete' id=plant.id %}"
                         onclick="return confirm('Are you sure you want to delete this plant type?')">Delete</a></td>
             </tr>
