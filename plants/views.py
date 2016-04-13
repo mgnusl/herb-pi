@@ -133,10 +133,14 @@ def new_plant_instance(request, id=None):
     if request.method == 'POST':
         form = PlantInstanceForm(data=request.POST)
         if form.is_valid():
-            instance = PlantInstance(plant_type=form.cleaned_data['plant_type'],
-                                     pin_number=form.cleaned_data['pin_number'])
+            if id is not None:
+                instance = PlantInstance.objects.get(id=id)
+            else:
+                instance = PlantInstance()
+            instance.plant_type = form.cleaned_data['plant_type']
+            instance.pin_number = form.cleaned_data['pin_number']
             instance.save()
-            messages.success(request, 'Instance created')
+            messages.success(request, 'Instance saved')
             return redirect('instances/index')
     if id is not None:
         form = PlantInstanceForm(instance=PlantInstance.objects.get(id=id))
