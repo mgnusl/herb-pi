@@ -125,7 +125,7 @@ def plant_instances_index(request):
     context = {'instances': PlantInstance.objects.all()}
     return render(request, 'instances/index.html', context)
 
-def new_plant_instance(request):
+def new_plant_instance(request, id=None):
     if request.method == 'POST':
         form = PlantInstanceForm(data=request.POST)
         if form.is_valid():
@@ -134,5 +134,9 @@ def new_plant_instance(request):
             instance.save()
             messages.success(request, 'Instance created')
             return redirect('instances/index')
-    context = {'form': PlantInstanceForm()}
+    if id is not None:
+        form = PlantInstanceForm(instance=PlantInstance.objects.get(id=id))
+    else:
+        form = PlantInstanceForm()
+    context = {'form': form}
     return render(request, 'instances/new.html', context)
