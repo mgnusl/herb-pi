@@ -1,4 +1,6 @@
-# EiT - IT for en bedre verden - Group 5
+# Herb Pi - An automatic watering system for herbs and other plants
+
+SKRIVE INTRO HER OG LEGGE TIL LINK TIL INSTRUCTABLE
 
 
 ### Project setup
@@ -20,14 +22,9 @@
 	
 5. 	Load initial plant data `python manage.py loaddata plants/fixtures/initial_data.json`
 
-6.  From web-app directory, run `npm install` to setup dependencies
-
-7.  From web-app directory, run `npm run build` to bundle all modules
+6. 	Start local web server: `python manage.py runserver`
  	
-8. 	Start local web server: `python manage.py runserver`
- 	
-9. 	Visit [http://localhost:8000/](http://localhost:8000/) and
-[http://localhost:8000/api/plants](http://localhost:8000/api/plants) to see if everything is set up properly
+7. 	Visit [http://localhost:8000/](http://localhost:8000/) to see if everything is set up properly
 
 
 ### REST endpoints
