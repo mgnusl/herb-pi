@@ -124,6 +124,7 @@ def plants_index(request):
     context = {'plants': Plant.objects.all()}
     return render(request, 'plants/index.html', context)
 
+
 def new_plant(request, id=None):
     if request.method == 'POST':
         form = PlantTypeForm(data=request.POST)
@@ -147,11 +148,13 @@ def new_plant(request, id=None):
     context = {'form': form, 'id': id}
     return render(request, 'plants/new.html', context)
 
+
 def delete_plant(request, id):
     plant = Plant.objects.get(id=id)
     plant.delete()
     messages.success(request, 'Plant type deleted')
     return redirect('plants/index')
+
 
 def plant_instances_index(request):
     context = {'instances': PlantInstance.objects.all()}

@@ -12,10 +12,10 @@
         }
     </style>
 
-    <a href="#" class="btn btn-default move-right">Edit</a>
+    <a href="{% url 'instances/edit' id=instance.id %}" class="btn btn-info move-right">Edit</a>
 
     <div class="page-header">
-        <h1>{{ instance }} <small>Subtext for header</small></h1>
+        <h1>{{ instance }}</h1>
     </div>
 
     <p>Connected to sensor: {{ instance.pin_number }}</p>
