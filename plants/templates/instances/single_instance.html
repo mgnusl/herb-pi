@@ -24,7 +24,12 @@
 
     <br>
     <h3>Humidity log</h3>
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    {% if moisture_log_dates %}
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    {% else %}
+        <h5>There is no log entries to show.</h5>
+    {% endif %}
+
 
     <script>
         $(function () {
