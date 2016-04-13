@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Plant types{% endblock %}
 {% block content %}
-<h2>Plants</h2>
+<h2>Plant types</h2>
+<a href="{% url 'plants/new' %}" class="btn btn-primary">Add new plant type</a>
+<br><br>
 <table class="table">
 <th>Name</th><th>Ideal humidity</th><th>Sun preference</th><th></th>
 {% for plant in plants %}
@@ -9,7 +11,7 @@
 <td>{{plant.name}}</td>
 <td>{{plant.ideal_humidity}}</td>
 <td>{{plant.sun_preference}}</td>
-<td><a href="#">Edit</a></td>
+<td><a href="{% url 'plants/edit' id=plant.id %}">Edit</a>|<a href="{% url 'plants/delete' id=plant.id %}" onclick="return confirm('Are you sure you want to delete this plant type?')">Delete</a></td>
 </tr>
 {% endfor %}
 </table>

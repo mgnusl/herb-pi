@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Plants{% endblock %}
 {% block content %}
-<h2>Plant instances</h2>
+<h2>Plants</h2>
 <a href="{% url 'instances/new'%}" class="btn btn-primary">Add new plant instance</a>
 <br><br>
 {% for plant in instances %}
