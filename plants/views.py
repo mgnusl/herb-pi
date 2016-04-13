@@ -5,6 +5,7 @@ from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
 from django.shortcuts import render, redirect, get_object_or_404
 from plants.serializers import *
 from plant_type_form import PlantTypeForm
+from plant_instance_form import PlantInstanceForm
 from django.contrib import messages
 from moisture import *
 
