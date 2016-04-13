@@ -1,19 +1,18 @@
 {% extends "base.html" %}
 {% block title %}Plants{% endblock %}
 {% block content %}
-<h2>Plant instances</h2>
-<a href="{% url 'instances/new'%}" class="btn btn-primary">Add new plant instance</a>
-<br><br>
-{% for plant in instances %}
-<div class="col-md-3">
-  <div class="well" style="background-color: white;">
-<h3>{{plant}}</h3>
-<p>Connected to sensor: {{plant.pin_number}}</p>
-<p>Ideal humidity: {{plant.plant_type.ideal_humidity}}</p>
-<p>Sun preference: {{plant.plant_type.sun_preference}}</p>
-<a href="#" class="btn btn-default">Edit</a>
-</div>
-</div>
-{% endfor %}
-
+    <h2>Plant instances</h2>
+    <a href="{% url 'instances/new'%}" class="btn btn-primary">Add new plant instance</a>
+    <br><br>
+    {% for plant in instances %}
+        <div class="col-md-3">
+            <div class="well" style="background-color: white;">
+                <h3>{{plant}}</h3>
+                <p>Connected to sensor: {{plant.pin_number}}</p>
+                <p>Ideal humidity: {{plant.plant_type.ideal_humidity}}</p>
+                <p>Sun preference: {{plant.plant_type.sun_preference}}</p>
+                <a href="#" class="btn btn-default">Edit</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

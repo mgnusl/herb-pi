@@ -131,13 +131,11 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = 'Europe/Oslo'
 
 USE_I18N = True
 
 USE_L10N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -145,7 +143,7 @@ USE_TZ = True
 
 # Point to local files since the project should work offline as well
 BOOTSTRAP3 = {
-    'jquery_url': '/static/js/jquery.min.js',
+    'jquery_url': '/static/js/jquery-2.2.3.min.js',
     'base_url': '/static/css/',
     'css_url': '/static/css/bootstrap.min.css',
     'theme_url': '/static/css/bootstrap.theme.min.css',

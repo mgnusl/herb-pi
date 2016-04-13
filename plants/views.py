@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from plants.serializers import *
 from plant_instance_form import PlantInstanceForm
 from django.contrib import messages
@@ -117,13 +117,16 @@ def plantinstance_list(request, format=None):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 def plants_index(request):
     context = {'plants': Plant.objects.all()}
     return render(request, 'plants/index.html', context)
 
+
 def plant_instances_index(request):
     context = {'instances': PlantInstance.objects.all()}
     return render(request, 'instances/index.html', context)
+
 
 def new_plant_instance(request):
     if request.method == 'POST':
@@ -136,3 +139,17 @@ def new_plant_instance(request):
             return redirect('instances/index')
     context = {'form': PlantInstanceForm()}
     return render(request, 'instances/new.html', context)
+
+
+def single_plant_instance(request, pk):
+    context = get_object_or_404(PlantInstance, pk=pk)
+    moisture_logs = MoistureLog.objects.filter(plant_instance=pk)
+
+    moisture_log_levels = []
+    moisture_log_dates = []
+    for log_item in moisture_logs:
+        moisture_log_dates.append(log_item.date.strftime("%B %d, %Y %H:%M"))
+        moisture_log_levels.append(log_item.moisture_level)
+
+    return render(request, 'instances/single_instance.html', {'instance': context, 'moisture_log_levels': moisture_log_levels,
+                                                              'moisture_log_dates': moisture_log_dates})

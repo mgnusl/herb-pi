@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ instance }}{% endblock %}
+{% block content %}
+    {% load staticfiles %}
+    <script src="{% static "/static/js/highcharts.js" %}"></script>
+    <script src="{% static "/static/js/exporting.js" %}"></script>
+
+    <h2>{{ instance }}</h2>
+    <p>Connected to sensor: {{ instance.pin_number }}</p>
+    <p>Ideal humidity: {{ instance.plant_type.ideal_humidity }}</p>
+    <p>Sun preference: {{ instance.plant_type.sun_preference }}</p>
+    <a href="#" class="btn btn-default">Edit</a>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Humidity log'
+                },
+                xAxis: {
+                    categories: {{ moisture_log_dates|safe }}
+                },
+                yAxis: {
+                    title: {
+                        text: 'Humidity level'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Humidity',
+                    data: {{ moisture_log_levels }}
+                }]
+            });
+        });
+    </script>
+
+
+
+{% endblock %}
