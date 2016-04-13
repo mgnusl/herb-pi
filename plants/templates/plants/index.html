@@ -1,10 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Plants{% endblock %}
+{% block title %}Plant types{% endblock %}
 {% block content %}
 <h2>Plants</h2>
-<div class="list-group">
+<table class="table">
+<th>Name</th><th>Ideal humidity</th><th>Sun preference</th><th></th>
 {% for plant in plants %}
-<a href="#" class="list-group-item">{{plant}}</a>
+<tr>
+<td>{{plant.name}}</td>
+<td>{{plant.ideal_humidity}}</td>
+<td>{{plant.sun_preference}}</td>
+<td><a href="#">Edit</a></td>
+</tr>
 {% endfor %}
+</table>
 </div>
 {% endblock %}
