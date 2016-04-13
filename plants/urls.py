@@ -14,6 +14,9 @@ urlpatterns = [
 
     # View URLs
     url(r'^plant_types/$', views.plants_index, name='plants/index'),
+    url(r'^plant_types/new/$', views.new_plant, name='plants/new'),
+    url(r'^plant_types/edit/(?P<id>\w+)$', views.new_plant, name='plants/edit'),
+    url(r'^plant_types/delete/(?P<id>\w+)$', views.delete_plant, name='plants/delete'),
     url(r'^plants/$', views.plant_instances_index, name='instances/index'),
     url(r'^plants/new/$', views.new_plant_instance, name='instances/new'),
     url(r'^plants/edit/(?P<id>\w+)$', views.new_plant_instance, name='instances/edit'),

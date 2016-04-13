@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from plants.models import Plant, MoistureLog, WateringLog, PlantInstance
 from django.shortcuts import render, redirect, get_object_or_404
 from plants.serializers import *
-from plant_instance_form import PlantInstanceForm
+from plant_type_form import PlantTypeForm
 from django.contrib import messages
 from moisture import *
 
@@ -123,6 +123,34 @@ def plants_index(request):
     context = {'plants': Plant.objects.all()}
     return render(request, 'plants/index.html', context)
 
+def new_plant(request, id=None):
+    if request.method == 'POST':
+        form = PlantTypeForm(data=request.POST)
+        if form.is_valid():
+            if id is not None:
+                instance = Plant.objects.get(id=id)
+            else:
+                instance = Plant()
+            instance.name = form.cleaned_data['name']
+            instance.ideal_humidity = form.cleaned_data['ideal_humidity']
+            instance.sun_preference = form.cleaned_data['sun_preference']
+            instance.shade_tolerance = form.cleaned_data['shade_tolerance']
+            instance.fertilizing_interval = form.cleaned_data['fertilizing_interval']
+            instance.save()
+            messages.success(request, 'Plant type saved')
+            return redirect('plants/index')
+    if id is not None:
+        form = PlantTypeForm(instance=Plant.objects.get(id=id))
+    else:
+        form = PlantTypeForm()
+    context = {'form': form, 'id': id}
+    return render(request, 'plants/new.html', context)
+
+def delete_plant(request, id):
+    plant = Plant.objects.get(id=id)
+    plant.delete()
+    messages.success(request, 'Plant type deleted')
+    return redirect('plants/index')
 
 def plant_instances_index(request):
     context = {'instances': PlantInstance.objects.all()}
