@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from plants.serializers import *
 from plant_instance_form import PlantInstanceForm
 from django.contrib import messages
+from moisture import *
 
 
 @api_view(['GET', 'POST'])
@@ -128,7 +129,7 @@ def plant_instances_index(request):
     return render(request, 'instances/index.html', context)
 
 
-def new_plant_instance(request):
+def new_plant_instance(request, id=None):
     if request.method == 'POST':
         form = PlantInstanceForm(data=request.POST)
         if form.is_valid():
@@ -137,7 +138,11 @@ def new_plant_instance(request):
             instance.save()
             messages.success(request, 'Instance created')
             return redirect('instances/index')
-    context = {'form': PlantInstanceForm()}
+    if id is not None:
+        form = PlantInstanceForm(instance=PlantInstance.objects.get(id=id))
+    else:
+        form = PlantInstanceForm()
+    context = {'form': form}
     return render(request, 'instances/new.html', context)
 
 
@@ -153,3 +158,25 @@ def single_plant_instance(request, pk):
 
     return render(request, 'instances/single_instance.html', {'instance': context, 'moisture_log_levels': moisture_log_levels,
                                                               'moisture_log_dates': moisture_log_dates})
+
+def calibrate_sensor(request, plant_instance_id):
+    plant_instance = PlantInstance.objects.get(id=plant_instance_id)
+    minmax = request.GET.get('minmax')
+    if minmax is not None:
+        print minmax
+        if minmax == 'min':
+            try:
+                plant_instance.sensor_offset_min = read_adc(plant_instance.pin_number)
+                plant_instance.save()
+                messages.success(request, 'Sensor minimum calibrated')
+            except Exception as e:
+                messages.error(request, 'Unable to get sensor input')
+        elif minmax == 'max':
+            try:
+                plant_instance.sensor_offset_max = read_adc(plant_instance.pin_number)
+                plant_instance.save()
+                messages.success(request, 'Sensor maximum calibrated')
+            except Exception as e:
+                messages.error(request, 'Unable to get sensor input')
+    context  = {'plant_instance': plant_instance}
+    return render(request, 'instances/calibrate.html', context)
