@@ -171,9 +171,13 @@ def new_plant_instance(request, id=None):
                 instance = PlantInstance()
             instance.plant_type = form.cleaned_data['plant_type']
             instance.pin_number = form.cleaned_data['pin_number']
-            instance.save()
-            messages.success(request, 'Instance saved')
-            return redirect('instances/index')
+            try:
+                instance.save()
+                messages.success(request, 'Instance saved')
+                return redirect('instances/index')
+            except Exception as e:
+                messages.error(request, 'Unable to save form. Make sure that you are using an unused pin number')
+
     if id is not None:
         form = PlantInstanceForm(instance=PlantInstance.objects.get(id=id))
     else:
