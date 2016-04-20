@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}New/edit instance{% endblock %}
+{% block content %}
+    <h1>Plant instance</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <br>
+        <input type="submit" value="Save" class="btn btn-primary"/>
+    </form>
+    {% if id %}
+        <a href="{% url 'instances/delete' id=id %}" class="btn btn-danger"
+           onclick="return confirm('Are you sure you want to delete this plant?')">Delete</a>
+    {% endif %}
+{% endblock %}

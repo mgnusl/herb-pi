@@ -35,7 +35,7 @@ class PlantInstance(models.Model):
     plant_type = models.ForeignKey(Plant)
     sensor_offset_max = models.IntegerField(help_text="Humidity sensor offset for calibration (max)", default=0)
     sensor_offset_min = models.IntegerField(help_text="Humidity sensor offset for calibration (min)", default=0)
-    pin_number = models.IntegerField(help_text="Pin number of the humidity sensor", default=0)
+    pin_number = models.IntegerField(help_text="Pin number of the humidity sensor", unique=True)
 
     def __str__(self):
         return str(self.plant_type.name)

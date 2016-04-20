@@ -3,7 +3,11 @@
 import spidev
 
 spi = spidev.SpiDev()
-spi.open(0, 1)
+try:
+    spi.open(0, 1)
+except Exception as e:
+    print e
+
 
 """ Moisture constants"""
 LEVELS = {'LOW': 60, 'MODERATE': 75, 'HIGH': 90}

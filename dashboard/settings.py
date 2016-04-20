@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+from django.contrib.messages import constants as message_constants
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,7 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'plants',
     'django_crontab',
-    'webpack_loader',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -58,7 +60,7 @@ MIDDLEWARE_CLASSES = [
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'cron.maybe_water_plant')
+    ('*/10 * * * *', 'cron.maybe_water_plant')
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
@@ -129,34 +131,34 @@ REST_FRAMEWORK = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = 'Europe/Oslo'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    #This lets Django's collectstatic store our bundles
-    os.path.join(BASE_DIR, 'web-app/assets/bundles'), 
-)
-
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'web-app/assets',
-        'STATS_FILE': os.path.join(BASE_DIR, 'web-app/webpack-stats.json'),
+# Point to local files since the project should work offline as well
+BOOTSTRAP3 = {
+    'jquery_url': '/static/js/jquery-2.2.3.min.js',
+    'base_url': '/static/css/',
+    'css_url': '/static/css/bootstrap.min.css',
+    'theme_url': '/static/css/bootstrap.theme.min.css',
+    'javascript_url': '/static/js/bootstrap.min.js',
     }
-}
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 # Allow Cross Origin Requests
 # https://github.com/ottoyiu/django-cors-headers
 CORS_ORIGIN_ALLOW_ALL = True
+
+MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
+                message_constants.INFO: 'info',
+                message_constants.SUCCESS: 'success',
+                message_constants.WARNING: 'warning',
+                message_constants.ERROR: 'danger'}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}{{ instance }}{% endblock %}
+{% block content %}
+    {% load staticfiles %}
+    <script src="{% static "/static/js/highcharts.js" %}"></script>
+    <script src="{% static "/static/js/exporting.js" %}"></script>
+
+    <style>
+        .move-right{
+            display: block;
+            float: right;
+        }
+    </style>
+
+    <a href="{% url 'instances/edit' id=instance.id %}" class="btn btn-info move-right">Edit</a>
+
+    <div class="page-header">
+        <h1>{{ instance }}</h1>
+    </div>
+
+    <p>Connected to sensor: {{ instance.pin_number }}</p>
+    <p>Ideal humidity: {{ instance.plant_type.ideal_humidity }}</p>
+    <p>Sun preference: {{ instance.plant_type.sun_preference }}</p>
+
+    <br>
+    <h3>Humidity log</h3>
+    {% if moisture_log_dates %}
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    {% else %}
+        <h5>There is no log entries to show.</h5>
+    {% endif %}
+
+
+    <script>
+        $(function () {
+            $('#container').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: {{ moisture_log_dates|safe }},
+                    min: 0,
+                    max: 20
+                },
+                yAxis: {
+                    title: {
+                        text: 'Humidity level (%)'
+                    }
+                },
+                colors: [
+                       '#2d8700'
+                ],
+                scrollbar: {
+                    enabled: true
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: true
+                    }
+                },
+                series: [{
+                    name: 'Humidity',
+                    data: {{ moisture_log_levels }}
+                }]
+            });
+        });
+    </script>
+
+    <br>
+    <h3>Watering log</h3>
+    {% if watering_logs %}
+        <!--<table class="table table-hover" style="width: 50%; margin: auto">-->
+        <table class="table table-hover" style="width: 60%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Watering valve open for number of seconds</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log_item in watering_logs %}
+                    <tr>
+                        <td>{{ log_item.date|date:'M d Y, H:i' }}</td>
+                        <td>{{ log_item.num_seconds_open }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h5>This plant has not been watered yet.</h5>
+    {% endif %}
+
+
+{% endblock %}
