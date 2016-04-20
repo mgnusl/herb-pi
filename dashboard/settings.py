@@ -60,7 +60,7 @@ MIDDLEWARE_CLASSES = [
 
 
 CRONJOBS = [
-    ('*/1 * * * *', 'cron.maybe_water_plant')
+    ('*/10 * * * *', 'cron.maybe_water_plant')
 ]
 
 ROOT_URLCONF = 'dashboard.urls'
