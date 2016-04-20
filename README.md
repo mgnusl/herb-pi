@@ -8,7 +8,6 @@ SKRIVE INTRO HER OG LEGGE TIL LINK TIL INSTRUCTABLE
 -	Python
 -	pip
 -	Virtualenv (`pip install virtualenv`)
--   Node 5.0.0 or higher
 
 **Setup:**
 
