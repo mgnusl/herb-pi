@@ -78,22 +78,24 @@
     <h3>Watering log</h3>
     {% if watering_logs %}
         <!--<table class="table table-hover" style="width: 50%; margin: auto">-->
-        <table class="table table-hover" style="width: 60%">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Watering valve open for number of seconds</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for log_item in watering_logs %}
-                    <tr>
-                        <td>{{ log_item.date|date:'M d Y, H:i' }}</td>
-                        <td>{{ log_item.num_seconds_open }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="col-md-6">
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Date</th>
+                      <th>Watering valve open for number of seconds</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for log_item in watering_logs %}
+                      <tr>
+                          <td>{{ log_item.date|date:'M d Y, H:i' }}</td>
+                          <td>{{ log_item.num_seconds_open }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        </div>
     {% else %}
         <h5>This plant has not been watered yet.</h5>
     {% endif %}
