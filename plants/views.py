@@ -197,10 +197,10 @@ def single_plant_instance(request, pk):
     context = get_object_or_404(PlantInstance, pk=pk)
     moisture_logs = MoistureLog.objects.filter(plant_instance=pk)[:1000]
     watering_logs = WateringLog.objects.filter(plant_instance=pk)[:1000]
-    watering_dates = map(lambda x: x.date, watering_logs)
+    watering_dates = map(lambda x: x.date.strftime("%B %d, %Y %H:%M"), watering_logs)
 
     moisture_log_dates = map(lambda x: x.date.strftime("%B %d, %Y %H:%M"),moisture_logs)
-    moisture_log_levels = '[' + ','.join(map(lambda x: ('{ y:' + str(x.moisture_level) + ", color: '#4233FF'}" if x.date in watering_dates else '{ y:' + str(x.moisture_level) + '}'),moisture_logs)) + ']'
+    moisture_log_levels = '[' + ','.join(map(lambda x: ('{ y:' + str(x.moisture_level) + ", color: '#4233FF'}" if x.date.strftime("%B %d, %Y %H:%M") in watering_dates else '{ y:' + str(x.moisture_level) + '}'),moisture_logs)) + ']'
 
     return render(request, 'instances/single_instance.html', {'instance': context,
                                                               'moisture_log_levels': moisture_log_levels,
