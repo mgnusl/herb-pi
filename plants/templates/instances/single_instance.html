@@ -42,8 +42,10 @@
                 },
                 xAxis: {
                     categories: {{ moisture_log_dates|safe }},
-                    min: 0,
-                    max: 20
+                    {% if moisture_log_dates|length > 20 %}
+                    min: {{moisture_log_dates|length|add:'-20'}},
+                    max: {{moisture_log_dates|length|add:'-1'}}
+                    {% endif %}
                 },
                 yAxis: {
                     title: {
