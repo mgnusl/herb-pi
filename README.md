@@ -1,6 +1,7 @@
 # Herb Pi - An automatic watering system for herbs and other plants
 
-SKRIVE INTRO HER OG LEGGE TIL LINK TIL INSTRUCTABLE
+[Instructable](http://www.instructables.com/id/Raspberry-Pi-Plant-Watering-System/?ALLSTEPS)
+
 
 
 ### Project setup
